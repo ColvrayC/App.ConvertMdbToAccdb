@@ -23,21 +23,12 @@ namespace App.ConvertMdbToAccdb
         {
             try
             {
-                if(IsAnAdministrator())
+                Process process = Process.Start(Const.DRIVER_PATH_MSI, "/q");
+                while (!process.HasExited)
                 {
-                    Process process = Process.Start(Const.DRIVER_PATH_MSI, "/q");
-                    while (!process.HasExited)
-                    {
-                        Display.infosMessage("Installation du pilote Access Database Engine 2010...", true);
-                        Thread.Sleep(250);
-                    }
+                    Display.infosMessage("Installation du pilote Access Database Engine 2010...", true);
+                    Thread.Sleep(250);
                 }
-                else
-                {
-                    Display.errorMessage("L'installation du pilote Access Database Engine 2010 necessite d'avoir les droits adminisrateurs.", true);
-                    return false;
-                }
-                
             }
             catch (Exception ex)
             {
@@ -58,13 +49,6 @@ namespace App.ConvertMdbToAccdb
         private string getMainLetter()
         {
             return Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
-        }
-
-        public static bool IsAnAdministrator()
-        {
-            WindowsIdentity identity = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new WindowsPrincipal(identity);
-            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
 }
