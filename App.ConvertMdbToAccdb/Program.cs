@@ -11,16 +11,14 @@ namespace App.ConvertMdbToAccdb
         [STAThread]
         private static void Main(string[] args)
         {
-            Action action = (Action)(() => Program.convertion());
-
-            if (action.BeginInvoke((AsyncCallback)null, (object)null).AsyncWaitHandle.WaitOne(600000))
-                Console.WriteLine("Method successful.");
-            else
-                Console.WriteLine("Method timed out.");
             Console.Title = "Conversion fichier MDB en ACCDB - DECLIC SAS";
-        }
+            //Vlide datas  + hemon au lieu de getpath
+            var argsSourceDbPath = ConsoleManager.IsValidPath(args);
 
-        private static void convertion()
+            if (!string.IsNullOrEmpty(argsSourceDbPath))
+                convertion(argsSourceDbPath);
+        }
+        private static void convertion(string argsSourceDbPath)
         {
             try
             {
@@ -29,19 +27,17 @@ namespace App.ConvertMdbToAccdb
                 DatabaseEngine databaseEngine = new DatabaseEngine();
                 if (!databaseEngine.driverInstalled())
                     databaseEngine.setupDriver();
-                new ConvertDatabase().convert(Program.getPaths());
+
+                //Convert database
+                new ConvertDatabase().convert(argsSourceDbPath);
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Erreur : " + (object)ex);
                 Console.Read();
             }
-            Console.Read();
         }
 
-        private static string getPaths()
-        {
-            return ConsoleManager.setSourcePath();
-        }
     }
 }

@@ -13,47 +13,31 @@ namespace App.ConvertMdbToAccdb
 
         public static string message { get; set; }
 
-        public static string setSourcePath()
+
+        internal static string IsValidPath(string[] args)
         {
-            string str = ConsoleManager.readPathFile();
-            if (string.IsNullOrEmpty(str))
+
+            var argsSourceDbPath = string.Empty;
+            //SI le chemin n'es pas passé en arguments, on génère une rreur dans le log.
+            if (args == null || args.Length == 0)
             {
-                while (string.IsNullOrEmpty(ConsoleManager.message))
+                Display.errorMessage("L'outil de conversion ne contient pas d'arguments.");
+            }
+            else
+            {
+                var argument = args[0];
+                if (!string.IsNullOrEmpty(argument) &&
+                    pathFileExist(argument) &&
+                    pathEqualsExtension(argument, ".mdb"))
                 {
-                    ConsoleManager.errorMessage = string.Empty;
-                    str = Display.readLine("Chemin du fichier MDB : ");
-                    if (ConsoleManager.pathFileExist(str) && ConsoleManager.pathEqualsExtension(str, ".mdb"))
-                    {
-                        ConsoleManager.WritePathFile(str);
-                        ConsoleManager.message = "Le fichier a été correctement identifié.";
-                        Display.successMessage(ConsoleManager.message, true);
-                    }
-                    if (!string.IsNullOrEmpty(ConsoleManager.errorMessage))
-                        Display.errorMessage(ConsoleManager.errorMessage, false);
+                    argsSourceDbPath = argument;
+                    Display.successMessage(message, true);
                 }
-            }
-            return str;
-        }
-
-        public static string readPathFile()
-        {
-            string str = string.Empty;
-            IniFile iniFile = new IniFile(Const.INIFILE_PATH);
-            if (iniFile.KeyExists(Const.INIFILE_VAR, (string)null))
-            {
-                string path = iniFile.Read(Const.INIFILE_VAR, (string)null);
-                if (!string.IsNullOrEmpty(Const.INIFILE_PATH) && iniFile.IsValidPath(path, false) && File.Exists(path))
-                    str = path;
                 else
-                    Display.errorMessage("le chemin indiqué dans le fichier INI n'est pas valide.", false);
+                    Display.errorMessage(errorMessage);
             }
-            return str;
-        }
 
-        public static string WritePathFile(string sourcePath)
-        {
-            new IniFile(Const.INIFILE_PATH).Write(Const.INIFILE_VAR, sourcePath.Trim(), (string)null);
-            return sourcePath;
+            return argsSourceDbPath;
         }
 
         private static bool pathFileExist(string pathFile)
@@ -69,7 +53,8 @@ namespace App.ConvertMdbToAccdb
         private static bool pathEqualsExtension(string pathFile, string extension)
         {
             bool flag = false;
-            if (Path.GetExtension(pathFile) == extension)
+            var fileExtension = Path.GetExtension(pathFile).ToLower();
+            if (fileExtension == extension.ToLower())
                 flag = true;
             else
                 ConsoleManager.errorMessage = "Le fichier doit être au format " + extension + ".";

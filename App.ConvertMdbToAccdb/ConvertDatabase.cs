@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace App.ConvertMdbToAccdb
@@ -35,6 +36,7 @@ namespace App.ConvertMdbToAccdb
                 Display.newLines(1);
                 Console.WriteLine("BASE CONVERTIE : " + Environment.NewLine);
                 Console.WriteLine(path ?? "");
+                Thread.Sleep(5000);
             }
             catch (Exception ex)
             {

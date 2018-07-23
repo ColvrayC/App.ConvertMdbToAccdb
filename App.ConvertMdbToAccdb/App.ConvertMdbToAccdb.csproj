@@ -70,7 +70,6 @@
     <Compile Include="ConvertDatabase.cs" />
     <Compile Include="DatabaseEngine.cs" />
     <Compile Include="Display.cs" />
-    <Compile Include="InitFile.cs" />
     <Compile Include="logs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
