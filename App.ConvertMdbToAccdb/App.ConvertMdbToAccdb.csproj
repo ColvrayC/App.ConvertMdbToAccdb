@@ -7,7 +7,7 @@
     <ProjectGuid>{D752ED36-FD85-4759-83A1-03E1F1B524B8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>App.ConvertMdbToAccdb</RootNamespace>
-    <AssemblyName>App.ConvertMdbToAccdb</AssemblyName>
+    <AssemblyName>ConvertMdbToAccdb</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -79,6 +79,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="ReadMe.txt" />
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
