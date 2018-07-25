@@ -12,7 +12,7 @@ namespace App.ConvertMdbToAccdb
     {
         public static string DRIVER_NAME = "DAO.DBEngine.120";
         public static string COMPACT_DATABASE = "CompactDatabase";
-        public static string DRIVER_PATH_MSI = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) + "\\accessDB2010x86.msi";
+        public static string DRIVER_PATH_MSI = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) + "\\AccessDB2010x64.msi";
         public static string INIFILE_PATH = Const.removeTexteFile(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) + "\\cheminSourceMDB.ini");
         public static string LOGFILE_PATH = Const.removeTexteFile(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase) + "\\Logs.txt");
         public static string INIFILE_VAR = "SourcePathDB";

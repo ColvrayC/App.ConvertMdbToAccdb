@@ -22,8 +22,8 @@ namespace App.ConvertMdbToAccdb
                     File.Delete(path);
                 object[] args = new object[2]
                 {
-          (object) SourceDb,
-          (object) path
+                  (object) SourceDb,
+                  (object) path
                 };
                 Display.infosMessage("Conversion de la base de données en cours...", true);
                 object instance = Activator.CreateInstance(Type.GetTypeFromProgID(Const.DRIVER_NAME));
@@ -37,6 +37,7 @@ namespace App.ConvertMdbToAccdb
                 Console.WriteLine("BASE CONVERTIE : " + Environment.NewLine);
                 Console.WriteLine(path ?? "");
                 Thread.Sleep(5000);
+                Environment.Exit(0);
             }
             catch (Exception ex)
             {

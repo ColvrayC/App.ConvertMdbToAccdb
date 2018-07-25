@@ -14,16 +14,21 @@ namespace App.ConvertMdbToAccdb
     {
         public string path { get; set; }
 
-        public bool driverInstalled()
+        public bool driverInstalledx86()
         {
             return File.Exists(this.getPathProgramFilesx86() + "\\Microsoft Office\\Office14\\STSLIST.DLL");
+        }
+        public bool driverInstalledx64()
+        {
+            return File.Exists(this.getPathProgramFilesx64() + "\\Microsoft Office\\Office14\\STSLIST.DLL");
         }
 
         public bool setupDriver()
         {
             try
             {
-                Process process = Process.Start(Const.DRIVER_PATH_MSI, "/q");
+
+                Process process = Process.Start(Const.DRIVER_PATH_MSI,"/q");
                 while (!process.HasExited)
                 {
                     Display.infosMessage("Installation du pilote Access Database Engine 2010...", true);
@@ -41,8 +46,11 @@ namespace App.ConvertMdbToAccdb
 
         private string getPathProgramFilesx86()
         {
-            if (8 == IntPtr.Size || !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432")))
-                return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
+            return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
+
+        }
+        private string getPathProgramFilesx64()
+        {
             return Environment.GetEnvironmentVariable("ProgramFiles");
         }
 

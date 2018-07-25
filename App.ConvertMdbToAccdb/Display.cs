@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace App.ConvertMdbToAccdb
@@ -35,11 +36,11 @@ namespace App.ConvertMdbToAccdb
             Display.foreground(ConsoleColor.Red);
             Console.WriteLine(errorMessage);
             Display.newLines(2);
-            Console.WriteLine("Appuez sur Entrée pour continuer...");
-            Console.ReadLine();
-            if (exit)
-                Process.GetCurrentProcess().Kill();
+            Console.WriteLine("L'application va se fermer dans quelques secondes...");
+            Thread.Sleep(5000);
+            Environment.Exit(0);
             Display.Clear();
+           
         }
 
         public static void foreground(ConsoleColor color)

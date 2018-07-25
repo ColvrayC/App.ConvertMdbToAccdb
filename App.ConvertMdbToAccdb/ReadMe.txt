@@ -4,12 +4,13 @@ Il doit toujours être lancé manuellement en tant qu'administrater la première
 
 [PROCEDURES]
 
-Au premier lancement l'outil vérifie que le pilote nécessaire au bon fonctionnement soit installé. Si ce n'est pas le cas, il l'installe en silencieux. 
+1. Ouvrir BIWEE, allez dans "Paramètres", "Mes Options" et décocher la case "Forcer Biwee en 32 Bits".
 
-Pour l'exécution, utiliser la commande cmd suivante :
+2. Fermer Biwee
 
-call "chemin\ConvertMdbToAccdb.exe" "CheminBaseMDB"
+3. Lancez l'outil en tant qu'administrateur (Permet d'installer le moteur Access si necessaire et d'éffectuer un premier test de conversion).
 
+4. Intégrez à la fin, la commande CMD dans le fichier bat de génération du fichier mdb : call "chemin\ConvertMdbToAccdb.exe" "cheminBaseMDB"
 
 
 [LOGS]
