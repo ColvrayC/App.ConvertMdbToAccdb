@@ -12,18 +12,22 @@ namespace App.ConvertMdbToAccdb
         private static void Main(string[] args)
         {
             Console.Title = "Conversion fichier MDB en ACCDB - DECLIC SAS";
+
+            //Gère l'instalaltion du Mteur Access
+            dbEngine();
+
             //Vlide datas  + hemon au lieu de getpath
             var argsSourceDbPath = ConsoleManager.IsValidPath(args);
 
             if (!string.IsNullOrEmpty(argsSourceDbPath))
                 convertion(argsSourceDbPath);
         }
-        private static void convertion(string argsSourceDbPath)
+        private static void dbEngine()
         {
+            Const.mylogs.createNewFileLogs();
+            Display.Title();
             try
             {
-                Const.mylogs.createNewFileLogs();
-                Display.Title();
                 DatabaseEngine databaseEngine = new DatabaseEngine();
                 if (databaseEngine.driverInstalledx86())
                     Display.errorMessage("Impossible d'installer le moteur Acess 2010 64 bits car une version 32 bits existe déjà. merci de la désinstaller puis de relancer l'outil.");
@@ -34,11 +38,18 @@ namespace App.ConvertMdbToAccdb
                     if (!databaseEngine.driverInstalledx64())
                         Display.errorMessage("Impossible d'installer le moteur Acess 2010, l'outil doit être démarré au moins une fois en tant qu'administrateur.");
                 }
+            }
+            catch
+            {
 
-
+            }
+        }
+        private static void convertion(string argsSourceDbPath)
+        {
+            try
+            {
                 //Convert database
                 new ConvertDatabase().convert(argsSourceDbPath);
-
             }
             catch (Exception ex)
             {

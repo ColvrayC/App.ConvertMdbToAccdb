@@ -1,6 +1,5 @@
 ﻿Le rôle de l'outil permet de convertir des bases de données mdb en accdb. Access n'es pas necessaire.
 
-Il doit toujours être lancé manuellement en tant qu'administrater la première fois !
 
 [PROCEDURES]
 
@@ -8,9 +7,10 @@ Il doit toujours être lancé manuellement en tant qu'administrater la première
 
 2. Fermer Biwee
 
-3. Lancez l'outil en tant qu'administrateur (Permet d'installer le moteur Access si necessaire et d'éffectuer un premier test de conversion).
-
 4. Intégrez à la fin, la commande CMD dans le fichier bat de génération du fichier mdb : call "chemin\ConvertMdbToAccdb.exe" "cheminBaseMDB"
+
+3. Lancez le fichier bat en tant qu'administrateur (seulement pour cette fois). Cela permet d'installer le moteur Access si necessaire et d'effectuer un premier test de conversion.
+
 
 
 [LOGS]
